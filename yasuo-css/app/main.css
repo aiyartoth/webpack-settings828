@@ -1,0 +1,9 @@
+.colf00 {
+    color: #f00
+}
+.box1 {
+    box-sizing: border-box
+}
+.scale {
+    transform: scale(0.5)
+}
