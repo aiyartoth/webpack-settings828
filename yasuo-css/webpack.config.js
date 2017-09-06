@@ -1,8 +1,8 @@
-var webpack = require('webpack')
-var CleanWebpackPlugin = require('clean-webpack-plugin')
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+let webpack = require('webpack');
+let CleanWebpackPlugin = require('clean-webpack-plugin');
+let UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
 // var extractCSS = new ExtractTextPlugin('[name].bundle.css')
 
 module.exports = {
@@ -18,22 +18,40 @@ module.exports = {
     },
     module: {
         rules: [{
-                test: /\.js$/, //解析文件类型
-                exclude: /node_modules/, //排除mode_modules文件
-                loader: 'babel-loader', //使用哪种loader解析
-                query: {
-                    presets: ['es2015', 'stage-0'] //loader的配置项，解析es6
-                }
-            },
+            test: /\.js$/, //解析文件类型
+            exclude: /node_modules/, //排除mode_modules文件
+            loader: 'babel-loader', //使用哪种loader解析
+            query: {
+                presets: ['es2015', 'stage-0'] //loader的配置项，解析es6
+            }
+        },
             {
                 test: /\.(less|css)$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
-                        { loader: 'css-loader', options: { importLoaders: 1,minimize:true } },
+                        {loader: 'css-loader', options: {importLoaders: 1, minimize: true}},
                         'postcss-loader'
                     ]
                 })
+            },
+            {
+                test: /\.(html)$/,
+                use: {
+                    loader: 'html-loader',
+                    options: {
+                        attrs: [':data-src']
+                    }
+                }
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ]
             }
         ]
     },
@@ -70,4 +88,4 @@ module.exports = {
         hot: true,
         port: 8181
     }
-}
+};
