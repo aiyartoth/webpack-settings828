@@ -40,7 +40,7 @@ module.exports = {
                 use: {
                     loader: 'html-loader',
                     options: {
-                        attrs: [':data-src']
+                        attrs: [':data-src', ":src"]
                     }
                 }
             },
@@ -49,7 +49,9 @@ module.exports = {
                 use: [
                     {
                         loader: 'file-loader',
-                        options: {}
+                        options: {
+                            name: 'assets/image/[name].[ext]?[hash]'
+                        }
                     }
                 ]
             }
@@ -80,7 +82,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: 'webpack-demo',
-            template: 'index.html'
+            template: 'app/index.html'
         })
     ],
     devServer: {
